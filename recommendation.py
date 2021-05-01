@@ -4,11 +4,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-
 import base64
 import datetime
 from urllib.parse import urlencode
-
 
 import json
 import re
@@ -29,13 +27,12 @@ from spotipy.oauth2 import SpotifyOAuth
 import spotipy.util as util
 
 import warnings
-warnings.filterwarnings("ignore")
 
+warnings.filterwarnings("ignore")
 
 from skimage import io
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-
 
 html = """
   <style>
@@ -76,16 +73,14 @@ html = """
   </style>
 """
 
-
 st.markdown(html, unsafe_allow_html=True)
 
 add_selectbox = st.sidebar.radio(
     "Please Select anyone",
-    ("Introduction","Exploratory Data Analysis","Market Analysis","Customer Segmentation using RFM","Churn Analysis","Recommendation System")
+    (
+    "Introduction", "Exploratory Data Analysis", "Market Analysis", "Customer Segmentation using RFM", "Churn Analysis",
+    "Recommendation System")
 )
-
-
-
 
 if add_selectbox == 'Recommendation System':
     st.title("Recommendations System :")
@@ -167,45 +162,57 @@ if add_selectbox == 'Recommendation System':
     def get_data():
         return pd.read_csv('data.csv')
 
+
     def get_edm():
         return pd.read_csv('edm_top20.csv')
+
 
     def get_english():
         return pd.read_csv('english_top20.csv')
 
+
     def get_hindi():
         return pd.read_csv('hindi_top20.csv')
+
 
     def get_hip_hop():
         return pd.read_csv('hip_hop_top20.csv')
 
+
     def get_pop():
         return pd.read_csv('pop_top20.csv')
+
 
     def get_latin():
         return pd.read_csv('latin_top20.csv')
 
+
     def get_metal():
         return pd.read_csv('metal_top20.csv')
+
 
     def get_rock():
         return pd.read_csv('rock_top20.csv')
 
+
     def get_beatles():
         return pd.read_csv('beatles_top20.csv')
 
+
     def get_mix():
         return pd.read_csv('mix_top20.csv')
+
 
     def get_nirvana():
         return pd.read_csv('nirvana_top20.csv')
 
 
     def load_data():
-        df = pd.DataFrame({'Name': [' ','Jack', 'Heather', 'Mark',
-                                    'Chris', 'Ankit', 'Maria','Vincent','Zian',
-                                    'Samuel','Becky','Robert']})
+        df = pd.DataFrame({'Name': [' ', 'Jack', 'Heather', 'Mark',
+                                    'Chris', 'Ankit', 'Maria', 'Vincent', 'Zian',
+                                    'Samuel', 'Becky', 'Robert']})
         return df
+
 
     df_english = get_english()
     df_edm = get_edm()
@@ -223,7 +230,7 @@ if add_selectbox == 'Recommendation System':
     st.subheader("Choose a Name : ")
     name_list = st.selectbox("Select User", df["Name"].unique())
 
-    if name_list == 'Jack' :
+    if name_list == 'Jack':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_english())
@@ -232,7 +239,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_english())
 
-    elif name_list == 'Ankit' :
+    elif name_list == 'Ankit':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_hindi())
@@ -241,7 +248,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_hindi())
 
-    elif name_list == 'Heather' :
+    elif name_list == 'Heather':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_metal())
@@ -250,7 +257,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_metal())
 
-    elif name_list == 'Mark' :
+    elif name_list == 'Mark':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_rock())
@@ -259,7 +266,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_rock())
 
-    elif name_list == 'Vincent' :
+    elif name_list == 'Vincent':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_edm())
@@ -268,7 +275,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_edm())
 
-    elif name_list == 'Maria' :
+    elif name_list == 'Maria':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_latin())
@@ -277,7 +284,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_latin())
 
-    elif name_list == 'Chris' :
+    elif name_list == 'Chris':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_hip_hop())
@@ -286,7 +293,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_hip_hop())
 
-    elif name_list == 'Zian' :
+    elif name_list == 'Zian':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_pop())
@@ -296,7 +303,7 @@ if add_selectbox == 'Recommendation System':
         visualize_songs(get_pop())
 
 
-    elif name_list == 'Samuel' :
+    elif name_list == 'Samuel':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_beatles())
@@ -305,7 +312,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_beatles())
 
-    elif name_list == 'Becky' :
+    elif name_list == 'Becky':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_mix())
@@ -314,7 +321,7 @@ if add_selectbox == 'Recommendation System':
 
         visualize_songs(get_mix())
 
-    elif name_list == 'Robert' :
+    elif name_list == 'Robert':
         st.title("Current Playlist : ")
 
         visualize_songs(get_playlist_nirvana())
@@ -330,9 +337,9 @@ elif add_selectbox == 'Introduction':
 
     st.markdown(
         """
-        
+
         Welcome to the web application with Sales Marketing Insights, Personalized Recommendation, RFM, and Churn Information required for the Marketing and Analysis team at Spotify, which will help them to view information of customers all in one place. Resulting in taking quick data-driven decisions for greater profits!
-        
+
         """
     )
 
@@ -730,14 +737,18 @@ elif add_selectbox == 'Exploratory Data Analysis':
     st.title("Exploratory Data Analysis :")
     st.write("-------------------------------------------------------------------------------------------------")
 
+
     def get_year():
         return pd.read_csv('data_by_year.csv')
+
 
     def get_w_genre():
         return pd.read_csv('data_w_genres.csv')
 
+
     def get_by_genre():
         return pd.read_csv('data_by_genres.csv')
+
 
     def get_data():
         return pd.read_csv('data.csv')
@@ -774,7 +785,7 @@ elif add_selectbox == 'Exploratory Data Analysis':
     fig.update_layout(font_size=15)
     st.write(fig)
 
-#Top Artists with Popularity by Sum
+    # Top Artists with Popularity by Sum
     fig = plt.figure(figsize=(16, 8))
     sns.set(style="whitegrid")
     x = data.groupby("artists")["popularity"].sum().sort_values(ascending=False).head(20)
@@ -782,10 +793,10 @@ elif add_selectbox == 'Exploratory Data Analysis':
     ax.set_title('Top Artists with Popularity by Sum')
     ax.set_ylabel('Popularity')
     ax.set_xlabel('Artists')
-    plt.xticks(rotation = 90)
+    plt.xticks(rotation=90)
     st.write(fig)
 
-#Top Tracks with Popularity
+    # Top Tracks with Popularity
     df1 = data.copy()
     df1['duration_ms'] = df1['duration_ms'] / 1000
     df1.rename({'duration_ms': 'duration_in_seconds'}, axis=1, inplace=True)
@@ -799,7 +810,7 @@ elif add_selectbox == 'Exploratory Data Analysis':
     plt.xticks(rotation=90)
     st.write(fig1)
 
-#Top artists with tracks
+    # Top artists with tracks
     fig2 = plt.figure(figsize=(16, 8))
     g_an = df1.groupby('artists')['name'].count().sort_values(ascending=False)[:20]
     axis = sns.barplot(g_an.index, g_an, palette='winter')
@@ -809,7 +820,7 @@ elif add_selectbox == 'Exploratory Data Analysis':
     plt.xticks(rotation=90)
     st.write(fig2)
 
-#popularity by years group
+    # popularity by years group
 
     bins = [1920, 1960, 2000, 2020]
     df1['year_bins'] = pd.cut(df1['year'], bins, labels=['20s-60s', '60s-2000', '2000-2020'])
@@ -834,10 +845,13 @@ elif add_selectbox == 'Customer Segmentation using RFM':
     st.title("Customer Segmentation using RFM :")
     st.write("-------------------------------------------------------------------------------------------------")
 
+
     def get_rfm():
         return pd.read_csv('rfm_level_ag - Copy.csv')
 
+
     rfm = get_rfm()
+
 
     # rfm_new = pd.DataFrame()
 
@@ -848,8 +862,6 @@ elif add_selectbox == 'Customer Segmentation using RFM':
     # rfm_new['MonetaryValue1'] = rfm['MonetaryValue1']
     def get_customers():
         return pd.read_csv('customers.csv')
-
-
 
 
     colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#FF00FF', '#C0C0C0']
@@ -875,7 +887,6 @@ elif add_selectbox == 'Customer Segmentation using RFM':
     scaler.fit(customers)
     customers_normalized = scaler.transform(customers)
 
-
     sse = {}
     for k in range(1, 8):
         kmeans = KMeans(n_clusters=k, random_state=1)
@@ -891,8 +902,6 @@ elif add_selectbox == 'Customer Segmentation using RFM':
     plt.plot(x, y)
     plt.show()
 
-
-
 if add_selectbox == 'Churn Analysis':
     st.title("Churn Analysis : ")
     st.write("-------------------------------------------------------------------------------------------------")
@@ -900,27 +909,29 @@ if add_selectbox == 'Churn Analysis':
     st.markdown(
         """
         # Purchase Frequency : 93.053
-        
-        
+
+
         # Repeat Rate : 0.333
-        
-        
-        
+
+
+
         # Churn Rate : 0.666
         """
-                )
+    )
+
 
     def get_sales():
         return pd.read_csv('sale.csv')
 
+
     def get_rfm_segment():
         return pd.read_csv('RFM_Segment.csv')
+
 
     sales = get_sales()
     rfm2 = get_rfm_segment()
 
-    id = st.selectbox("Select CustomerID : ",sales['CustomerID'])
-
+    id = st.selectbox("Select CustomerID : ", sales['CustomerID'])
 
     if id:
         count = -1
@@ -930,9 +941,6 @@ if add_selectbox == 'Churn Analysis':
                 st.title("Customer Lifetime Value: ")
                 st.subheader(sales['CLV'][count])
                 st.title(rfm2['Customer Segment'][count])
-
-
-
 
 if add_selectbox == 'Market Analysis':
     st.title("Market Analysis")
